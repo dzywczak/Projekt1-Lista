@@ -2,7 +2,7 @@
 using namespace std;
 
 class Lista{
-    private:
+    public:
     struct zmienna{
         int wartosc;
         zmienna* nastepny;
@@ -20,7 +20,6 @@ class Lista{
     ~Lista();
     void dodaj(int a);
     void usun(int a);
-
 };
 
 
@@ -31,6 +30,17 @@ int main()
     *zmienna = 5;
     cout << *zmienna << endl;
     */
+    Lista listonosz;
+    listonosz.dodaj(4); // <- trzeci element 
+    cout << listonosz.pierwszy->wartosc << endl;
+    listonosz.dodaj(10); // <- drugi element
+    cout << listonosz.pierwszy->wartosc << endl;
+    listonosz.dodaj(18);// <- pierwszy element
+    cout << listonosz.pierwszy->wartosc << endl;
+    listonosz.dodaj(20);
+    cout << listonosz.pierwszy->wartosc << endl;
+    
+    
 }
 
 Lista::Lista()
@@ -58,8 +68,10 @@ void Lista::dodaj(int a)
         pierwszy -> poprzedni = node;
     }
     else {
-        pierwszy = node;
+        ostatni = node;
     }
+    pierwszy = node;
+    liczenie++;
 }
 
 void Lista::usun(int a)
