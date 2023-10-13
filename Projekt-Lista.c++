@@ -60,8 +60,6 @@ void Lista::dodaj(int a)
     else {
         pierwszy = node;
     }
-    pierwszy = node;
-    liczenie++;
 }
 
 void Lista::usun(int a)
