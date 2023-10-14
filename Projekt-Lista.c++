@@ -18,8 +18,10 @@ class Lista{
     public:
     Lista();
     ~Lista();
-    void dodaj(int a);
+    void dodajp(int a);
+    void dodajk(int a);
     void usun(int a);
+    void wyswietl();
 };
 
 
@@ -30,16 +32,18 @@ int main()
     *zmienna = 5;
     cout << *zmienna << endl;
     */
-    Lista listonosz;
-    listonosz.dodaj(4); // <- trzeci element 
-    cout << listonosz.pierwszy->wartosc << endl;
-    listonosz.dodaj(10); // <- drugi element
-    cout << listonosz.pierwszy->wartosc << endl;
-    listonosz.dodaj(18);// <- pierwszy element
-    cout << listonosz.pierwszy->wartosc << endl;
-    listonosz.dodaj(20);
-    cout << listonosz.pierwszy->wartosc << endl;
-    
+
+Lista listonosz;
+listonosz.dodajk(65); //element dodawany na koniec listy 
+listonosz.dodajp(34); //element dodawany na poczatek listy
+listonosz.dodajp(12);
+
+listonosz.wyswietl();
+
+
+
+return 0;
+
     
 }
 
@@ -52,7 +56,8 @@ Lista::Lista()
 
 Lista::~Lista(){};
 
-void Lista::dodaj(int a)
+//dodawanie na poczatek listy
+void Lista::dodajp(int a)
 {
     //element listy na stercie
     zmienna* node = new zmienna;
@@ -74,6 +79,33 @@ void Lista::dodaj(int a)
     liczenie++;
 }
 
+void Lista::dodajk(int a)
+{
+    zmienna* nodes = new zmienna;
+    nodes -> wartosc = a;
+    nodes -> nastepny = nullptr;
+    if(!pierwszy) {
+        pierwszy = nodes;
+        ostatni = nodes;
+        nodes->poprzedni = nullptr;
+    }
+    else {
+        nodes -> poprzedni = ostatni;
+        ostatni -> nastepny = nodes;
+        ostatni = nodes;
+    }
+    liczenie++;
+}
+
 void Lista::usun(int a)
 {
+}
+
+void Lista::wyswietl()
+{
+    zmienna* obecna = pierwszy;
+    while(obecna != nullptr) {
+        cout << obecna->wartosc << " ";
+        obecna = obecna->nastepny;
+    }
 }
