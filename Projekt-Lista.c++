@@ -88,6 +88,11 @@ int indeksik = 0;
 listonosz.usunindeks(indeksik);//usuniecie elementu po wpisaniu indeksu
 listonosz.wyswietl();
 
+cout << endl;
+cout << "Lista zostala wyczyszczona ! " << endl;
+listonosz.wyczysc();
+listonosz.wyswietl();
+
 return 0;
 
 }
@@ -304,4 +309,15 @@ void Lista::wyswietlpoprzedni(int wartosc)
 }
     cout << "Brak elementu : " << wartosc << endl;
 }
-
+//metoda czyszczaca liste
+void Lista::wyczysc()
+{
+    while (pierwszy != nullptr)
+    {
+        zmienna* czysc = pierwszy; //wskaznik pamietajacy pierwszy element
+        pierwszy = pierwszy -> nastepny;
+        delete czysc;
+    }
+    ostatni = nullptr;
+    liczenie = 0;
+}
