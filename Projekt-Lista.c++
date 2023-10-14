@@ -26,6 +26,9 @@ class Lista{
     void usunk();
     void usunindeks(int indeks);
     void wyswietlodwrtn();
+    void wyswietlkolejny(int wartosc);
+    void wyswietlpoprzedni(int wartosc);
+    void wyczysc();
 };
 
 
@@ -46,8 +49,21 @@ listonosz.dodajk(99);
 listonosz.wyswietl();
 
 cout << endl;
-cout << "Wyswietlenie listy w odwrotnej kolejnosci:" << endl;
+cout << "Wyswietlenie nastepnego elementu listy: " << endl;
+int szukaj = 12; 
+listonosz.wyswietlkolejny(szukaj); //wyswietlenie elementu kolejnego po 12
+int szukajo = 78; //element który nie istnieje w liscie
+listonosz.wyswietlkolejny(szukajo);
 
+cout << endl;
+cout << "Wyswietlenie poprzedniego elementu listy: " << endl;
+int poprzedni = 34; 
+listonosz.wyswietlpoprzedni(poprzedni); //wyswietlenie elementu kolejnego po 12
+int poprzednik = 86; //element który nie istnieje w liscie
+listonosz.wyswietlpoprzedni(poprzednik);
+
+cout << endl;
+cout << "Wyswietlenie listy w odwrotnej kolejnosci:" << endl;
 listonosz.wyswietlodwrtn();
 
 cout << endl;
@@ -74,7 +90,6 @@ listonosz.wyswietl();
 
 return 0;
 
- 
 }
 
 Lista::Lista()
@@ -247,3 +262,46 @@ void Lista::wyswietlodwrtn()
 
 }
 }
+//metoda wyswietlajaca kolejny element w liscie
+void Lista::wyswietlkolejny(int wartosc)
+{
+    zmienna* obecna = pierwszy;
+    while (obecna != nullptr)
+    {
+        if(obecna->wartosc == wartosc) {//sprawdzenie czy wartosc jest rowna wartosci w biezacym elemencie listy 
+        if(obecna->nastepny != nullptr) 
+        {
+             cout << "Nastepny element to: " << obecna->nastepny->wartosc << endl;
+             return;
+        }
+        else {
+            cout << "Ostatni element listy" << endl;
+            return;
+        }
+    }
+    obecna = obecna->nastepny;
+}
+    cout << "Brak elementu : " << wartosc << endl;
+}
+//metoda wyswietlajaca poprzedni element w liscie
+void Lista::wyswietlpoprzedni(int wartosc)
+{
+    zmienna* obecna = ostatni;
+    while (obecna != nullptr)
+    {
+        if(obecna->wartosc == wartosc) {//sprawdzenie czy wartosc jest rowna wartosci w biezacym elemencie listy 
+        if(obecna->poprzedni != nullptr) 
+        {
+             cout << "Poprzedni element to: " << obecna->poprzedni->wartosc << endl;
+             return;
+        }
+        else {
+            cout << "Nie ma wiecej elementow poprzednich" << endl;
+            return;
+        }
+    }
+    obecna = obecna->poprzedni;
+}
+    cout << "Brak elementu : " << wartosc << endl;
+}
+
