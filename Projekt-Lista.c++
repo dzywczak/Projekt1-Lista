@@ -24,6 +24,8 @@ class Lista{
     void indeksd(int b, int indeks);
     void usunp();
     void usunk();
+    void usunindeks(int indeks);
+    void wyswietlodwrtn();
 };
 
 
@@ -34,6 +36,7 @@ int main()
     *zmienna = 5;
     cout << *zmienna << endl;
     */
+cout << "Wyswietlenie listy z elementami dodanymi na poczatku listy i koncu:" << endl;
 
 Lista listonosz;
 listonosz.dodajk(65); //element dodawany na koniec listy 
@@ -43,6 +46,12 @@ listonosz.dodajk(99);
 listonosz.wyswietl();
 
 cout << endl;
+cout << "Wyswietlenie listy w odwrotnej kolejnosci:" << endl;
+
+listonosz.wyswietlodwrtn();
+
+cout << endl;
+cout << "Wyswietlenie listy z elementem dodanym pod wskazany indeks:" << endl;
 
 int wartosci = 98;
 int indeks = 1;
@@ -50,12 +59,18 @@ listonosz.indeksd(wartosci, indeks); //dodanie elementu pod wskazany indeks
 listonosz.wyswietl();
 
 cout << endl;
+cout << "Wyswietlenie listy z usunieciem pierwszego i ostatniego elementu:" << endl;
 
 listonosz.usunp(); //usuwanie pierwszego elementu
 listonosz.usunk();
 listonosz.wyswietl();
 
 cout << endl;
+cout << "Wyswietlenie listy z usunieciem elementu po wpisaniu indeksu:" << endl;
+
+int indeksik = 0;
+listonosz.usunindeks(indeksik);//usuniecie elementu po wpisaniu indeksu
+listonosz.wyswietl();
 
 return 0;
 
@@ -159,7 +174,7 @@ void Lista::usunp()
 {
 if(pierwszy == nullptr)
 {
-    cout << "Lista jest pusta" << endl;
+    cout << "Lista aktualnie jest pusta" << endl;
     return;
 }
 zmienna* usunpoczatek = pierwszy; //tworzenie wskaznika
@@ -169,6 +184,7 @@ if (pierwszy != nullptr) {
     pierwszy->poprzedni = nullptr; //Ustawienie wskaźnika poprzedniego pierwszego elementu na nullptr
 }
 }
+
 //metoda do usuwania ostatniego elementu listy
 void Lista::usunk()
 { 
@@ -184,4 +200,50 @@ void Lista::usunk()
     {
         ostatni->nastepny = nullptr;
     }
+}
+//metoda do usuwania elementu po wskazaniu indeksu
+void Lista::usunindeks(int indeks)
+{
+    if (indeks < 0 || indeks >= liczenie)
+    {
+        cout << "Błąd" << endl;
+        return;
+    }
+    zmienna* element = pierwszy; //wskaznik
+    for (int i = 0; i < indeks; i++) //pętla odpowiadajaca za przesuniecie wskaznika na element o podanym indeksie
+    {
+        element = element->nastepny;
+    }
+
+    if (element->poprzedni)
+    {
+        element->poprzedni->nastepny = element->nastepny; //przypisanie 
+    }
+    else
+    {
+        pierwszy = element->nastepny; //przypisanie pierwszy element wskazywany na nastepny
+        pierwszy->poprzedni = nullptr; //pierwszy wskazuje na poprzedni i przypisuje mu wartosc nullptr
+    }
+
+    if (element->nastepny)
+    {
+        element->nastepny->poprzedni = element->poprzedni;
+    }
+    else
+    {
+        ostatni = element->poprzedni;
+    }
+
+    delete element;
+    liczenie--;
+}
+//metoda wyświetlająca liste w odwrotnej kolejnosci
+void Lista::wyswietlodwrtn()
+{
+    zmienna* obecny = ostatni;
+    while(obecny != nullptr) {
+        cout << obecny->wartosc << " ";
+        obecny = obecny->poprzedni;
+
+}
 }
